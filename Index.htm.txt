@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Solución INSTALL-TRACK</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px; /* Increased max-width for charts */
+            margin-left: auto;
+            margin-right: auto;
+            height: 380px; /* Slightly increased height */
+            max-height: 450px; /* Slightly increased max-height */
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 420px; /* Adjusted height for medium screens */
+            }
+        }
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            min-width: 140px; /* Slightly wider steps */
+            padding: 1.5rem; /* More padding */
+            border-radius: 0.75rem; /* Rounded corners */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            background-color: #f7f7f7; /* Lighter background for steps */
+        }
+        .flow-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .flow-arrow {
+            font-size: 2.5rem; /* Larger arrow */
+            color: #94D2BD;
+            margin: 0 1.5rem; /* More margin */
+            display: none;
+            align-self: center; /* Center vertically */
+        }
+        @media (min-width: 768px) {
+            .flow-arrow {
+                display: block;
+            }
+        }
+        .mockup-browser {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            background-color: #fff;
+        }
+        .mockup-browser-header {
+            background-color: #f1f5f9;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .mockup-browser-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .mockup-browser-dot {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 9999px;
+        }
+        .mockup-browser-url-bar {
+            flex-grow: 1;
+            background-color: #e2e8f0;
+            border-radius: 0.375rem;
+            padding: 0.25rem 0.75rem;
+            margin: 0 1rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: #475569;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-200 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-10">
+
+        <header class="text-center mb-16 pt-8">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-[#005F73] mb-4 leading-tight">Revolucionando el Servicio Post-Venta</h1>
+            <p class="text-xl text-[#0A9396] max-w-4xl mx-auto">Descubre cómo <span class="font-bold">INSTALL-TRACK</span> transforma la experiencia de armado e instalación de productos, convirtiendo desafíos en oportunidades.</p>
+        </header>
+
+        <section id="problema" class="mb-20">
+            <div class="bg-white rounded-xl shadow-2xl p-8 md:p-12 border border-gray-200">
+                <h2 class="text-4xl font-bold text-center text-[#BB3E03] mb-8">La Experiencia Actual: Un Proceso Roto y Costoso</h2>
+                <p class="text-center text-gray-700 mb-10 max-w-4xl mx-auto text-lg">El modelo tradicional de agendamiento y ejecución del servicio post-venta está plagado de ineficiencias, frustrando a los clientes y generando costos ocultos para el retail.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-6 text-center flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-300 shadow-md">
+                        <div class="text-5xl mb-3 text-red-600">📞</div>
+                        <h3 class="font-bold text-red-800 text-xl">Dependencia del Call Center</h3>
+                        <p class="text-base text-red-700 mt-2">El cliente debe llamar activamente para coordinar, creando un punto de fricción innecesario.</p>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-6 text-center flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-300 shadow-md">
+                        <div class="text-5xl mb-3 text-red-600">📜⏳</div>
+                        <h3 class="font-bold text-red-800 text-xl">Burocracia y Demoras</h3>
+                        <p class="text-base text-red-700 mt-2">Procesos manuales y complejos que resultan en agendamientos tardíos y poca flexibilidad.</p>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-6 text-center flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-300 shadow-md">
+                        <div class="text-5xl mb-3 text-red-600">🕵️‍♀️❓</div>
+                        <h3 class="font-bold text-red-800 text-xl">Falta de Transparencia</h3>
+                        <p class="text-base text-red-700 mt-2">El cliente no conoce al técnico asignado, generando incertidumbre y desconfianza.</p>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-6 text-center flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-300 shadow-md">
+                        <div class="text-5xl mb-3 text-red-600">🗣️📉</div>
+                        <h3 class="font-bold text-red-800 text-xl">Atención Inconsistente</h3>
+                        <p class="text-base text-red-700 mt-2">La calidad del servicio varía, afectando la percepción de la marca y la satisfacción del cliente.</p>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-6 text-center flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-300 shadow-md">
+                        <div class="text-5xl mb-3 text-red-600">🚫📊</div>
+                        <h3 class="font-bold text-red-800 text-xl">Ceguera Operacional</h3>
+                        <p class="text-base text-red-700 mt-2">El retail carece de visibilidad en tiempo real del proceso, impidiendo la gestión proactiva.</p>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-6 text-center flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-300 shadow-md">
+                        <div class="text-5xl mb-3 text-red-600">😡💔</div>
+                        <h3 class="font-bold text-red-800 text-xl">Impacto en la Lealtad</h3>
+                        <p class="text-base text-red-700 mt-2">La mala experiencia deteriora la relación con el cliente y afecta la recompra.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="solucion" class="mb-20">
+            <h2 class="text-4xl font-bold text-center text-[#005F73] mb-10">La Solución: Un Flujo de Trabajo Inteligente y Centrado en el Cliente</h2>
+            <div class="bg-white rounded-xl shadow-2xl p-8 md:p-12 border border-gray-200">
+                <p class="text-center text-gray-700 mb-10 max-w-4xl mx-auto text-lg">INSTALL-TRACK optimiza cada etapa del servicio, desde la entrega hasta la calificación, garantizando una experiencia fluida y transparente.</p>
+                <div class="flex flex-col md:flex-row justify-between items-stretch space-y-8 md:space-y-0 md:space-x-4">
+                    <div class="flow-step">
+                        <div class="bg-[#94D2BD] rounded-full w-24 h-24 flex items-center justify-center text-5xl text-white mb-4">📦</div>
+                        <h3 class="font-extrabold mt-2 text-[#005F73] text-2xl">1. Entrega Detectada</h3>
+                        <p class="text-sm text-gray-600">Integración con sistemas de logística para detectar la recepción del producto.</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="bg-[#94D2BD] rounded-full w-24 h-24 flex items-center justify-center text-5xl text-white mb-4">📲</div>
+                        <h3 class="font-extrabold mt-2 text-[#005F73] text-2xl">2. Notificación Inteligente</h3>
+                        <p class="text-sm text-gray-600">El cliente recibe un link de auto-agendamiento personalizado vía WhatsApp/Email.</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="bg-[#94D2BD] rounded-full w-24 h-24 flex items-center justify-center text-5xl text-white mb-4">🗓️</div>
+                        <h3 class="font-extrabold mt-2 text-[#005F73] text-2xl">3. Auto-Agendamiento</h3>
+                        <p class="text-sm text-gray-600">El cliente elige la fecha y jornada que mejor se adapte a su disponibilidad.</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="bg-[#94D2BD] rounded-full w-24 h-24 flex items-center justify-center text-5xl text-white mb-4">🛠️</div>
+                        <h3 class="font-extrabold mt-2 text-[#005F73] text-2xl">4. Ejecución del Servicio</h3>
+                        <p class="text-sm text-gray-600">El técnico asignado realiza el servicio, con recordatorios y seguimiento en tiempo real.</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="bg-[#94D2BD] rounded-full w-24 h-24 flex items-center justify-center text-5xl text-white mb-4">⭐</div>
+                        <h3 class="font-extrabold mt-2 text-[#005F73] text-2xl">5. Calificación y Feedback</h3>
+                        <p class="text-sm text-gray-600">El cliente evalúa el servicio, generando datos cruciales para la mejora continua.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="insights" class="mb-20">
+            <h2 class="text-4xl font-bold text-center text-[#005F73] mb-10">Inteligencia de Negocio para Decisiones Estratégicas</h2>
+            <p class="text-center text-gray-700 mb-10 max-w-4xl mx-auto text-lg">INSTALL-TRACK no solo optimiza la operación, sino que también empodera al retail con visibilidad total y métricas accionables para una gestión proactiva.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="bg-white rounded-xl shadow-2xl p-8 border border-gray-200 flex flex-col">
+                    <h3 class="text-2xl font-bold text-center text-[#0A9396] mb-6">Nivel de Servicio en Plazo por Empresa</h3>
+                    <p class="text-base text-center text-gray-600 mb-6">Compare el rendimiento de sus proveedores de servicios. Una mayor tasa de cumplimiento se traduce directamente en clientes más satisfechos y operaciones más eficientes.</p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="onTimeChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-2xl p-8 border border-gray-200 flex flex-col">
+                    <h3 class="text-2xl font-bold text-center text-[#0A9396] mb-6">Calificación Promedio de Clientes</h3>
+                    <p class="text-base text-center text-gray-600 mb-6">Identifique a los proveedores con mejor y peor evaluación. La calificación es un indicador directo de la calidad del servicio percibida por el cliente y la lealtad a la marca.</p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="ratingChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-2xl p-8 border border-gray-200 lg:col-span-2 flex flex-col">
+                    <h3 class="text-2xl font-bold text-center text-[#0A9396] mb-6">Tendencia de Servicios Realizados en Plazo (Últimos 3 Meses)</h3>
+                    <p class="text-base text-center text-gray-600 mb-6">Monitoree la evolución del rendimiento de sus principales socios de servicio a lo largo del tiempo. Identifique tendencias, detecte anomalías y tome decisiones estratégicas informadas para la mejora continua.</p>
+                     <div class="chart-container flex-grow h-96">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="retail-platform" class="mb-20">
+            <h2 class="text-4xl font-bold text-center text-[#005F73] mb-10">Plataforma de Gestión Retail: Visibilidad Total</h2>
+            <p class="text-center text-gray-700 mb-10 max-w-4xl mx-auto text-lg">El portal de gestión para el retail ofrece una visión 360° de todas las órdenes de trabajo, desde consultas generales hasta reportes detallados, empoderando la toma de decisiones.</p>
+
+            <div class="grid grid-cols-1 gap-10">
+                <!-- Consulta General Órdenes de Trabajo -->
+                <div class="bg-white rounded-xl shadow-2xl p-8 border border-gray-200">
+                    <h3 class="text-2xl font-bold text-center text-[#0A9396] mb-6">Consulta General de Órdenes de Trabajo</h3>
+                    <p class="text-base text-center text-gray-600 mb-6">Filtre y visualice todas las órdenes de trabajo por estado, empresa de servicios y rango de fechas. Una visión consolidada para una gestión eficiente.</p>
+                    <div class="mockup-browser">
+                        <div class="mockup-browser-header">
+                            <div class="mockup-browser-dots">
+                                <div class="mockup-browser-dot bg-red-500"></div>
+                                <div class="mockup-browser-dot bg-yellow-500"></div>
+                                <div class="mockup-browser-dot bg-green-500"></div>
+                            </div>
+                            <div class="mockup-browser-url-bar">install-track.cl/portal/consultas/general</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex flex-wrap items-center gap-4 mb-6">
+                                <div class="flex flex-col">
+                                    <label for="estado" class="text-sm font-medium text-gray-700 mb-1">Estado OT</label>
+                                    <select id="estado" class="p-2 border border-gray-300 rounded-md">
+                                        <option>Todos</option>
+                                        <option>Creada</option>
+                                        <option>Agendada</option>
+                                        <option>Iniciada</option>
+                                        <option>Terminada</option>
+                                        <option>Calificada</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="empresa" class="text-sm font-medium text-gray-700 mb-1">Empresa Servicios</label>
+                                    <select id="empresa" class="p-2 border border-gray-300 rounded-md">
+                                        <option>Todos</option>
+                                        <option>Servicios Spa</option>
+                                        <option>Instal Plus</option>
+                                        <option>Armados Ya</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="fecha" class="text-sm font-medium text-gray-700 mb-1">Fecha desde-hasta</label>
+                                    <input type="text" id="fecha" value="01/07/2024 - 31/07/2024" class="p-2 border border-gray-300 rounded-md">
+                                </div>
+                                <button class="bg-[#EE9B00] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#BB3E03] transition duration-300">Buscar</button>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                                    <thead>
+                                        <tr class="bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            <th class="py-3 px-4 border-b">N° OT</th>
+                                            <th class="py-3 px-4 border-b">Fecha Creación</th>
+                                            <th class="py-3 px-4 border-b">Rut Cliente</th>
+                                            <th class="py-3 px-4 border-b">Nombre Cliente</th>
+                                            <th class="py-3 px-4 border-b">Producto</th>
+                                            <th class="py-3 px-4 border-b">Estado</th>
+                                            <th class="py-3 px-4 border-b">Detalle</th>
+                                            <th class="py-3 px-4 border-b">Empresa Servicio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 border-b text-[#005F73] font-medium">100201</td>
+                                            <td class="py-3 px-4 border-b">1/7/2024</td>
+                                            <td class="py-3 px-4 border-b">12202304-1</td>
+                                            <td class="py-3 px-4 border-b">Juan Perez Perez</td>
+                                            <td class="py-3 px-4 border-b">Mesa Comedor 6 sillas</td>
+                                            <td class="py-3 px-4 border-b">Creada</td>
+                                            <td class="py-3 px-4 border-b"></td>
+                                            <td class="py-3 px-4 border-b">Armados JP</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 border-b text-[#005F73] font-medium">100202</td>
+                                            <td class="py-3 px-4 border-b">17/7/2024</td>
+                                            <td class="py-3 px-4 border-b">11202241-2</td>
+                                            <td class="py-3 px-4 border-b">Luis Moya Moya</td>
+                                            <td class="py-3 px-4 border-b">Escritorio roble</td>
+                                            <td class="py-3 px-4 border-b">Terminada</td>
+                                            <td class="py-3 px-4 border-b">Conforme</td>
+                                            <td class="py-3 px-4 border-b">Armados JP</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 border-b text-[#005F73] font-medium">100203</td>
+                                            <td class="py-3 px-4 border-b">21/7/2024</td>
+                                            <td class="py-3 px-4 border-b">10302401-3</td>
+                                            <td class="py-3 px-4 border-b">Ana Suarez Suarez</td>
+                                            <td class="py-3 px-4 border-b">Calefont 12 litros</td>
+                                            <td class="py-3 px-4 border-b">Agendada</td>
+                                            <td class="py-3 px-4 border-b"></td>
+                                            <td class="py-3 px-4 border-b">Instalaciones YZ</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 border-b text-[#005F73] font-medium">100204</td>
+                                            <td class="py-3 px-4 border-b">24/7/2024</td>
+                                            <td class="py-3 px-4 border-b">13309803-4</td>
+                                            <td class="py-3 px-4 border-b">Juan Diaz Diaz</td>
+                                            <td class="py-3 px-4 border-b">Bicicleta Aro 29</td>
+                                            <td class="py-3 px-4 border-b">Iniciada</td>
+                                            <td class="py-3 px-4 border-b"></td>
+                                            <td class="py-3 px-4 border-b">Armados RB</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 border-b text-[#005F73] font-medium">100205</td>
+                                            <td class="py-3 px-4 border-b">27/7/2024</td>
+                                            <td class="py-3 px-4 border-b">12670034-6</td>
+                                            <td class="py-3 px-4 border-b">Jorge Duran Duran</td>
+                                            <td class="py-3 px-4 border-b">Parrilla a Gas</td>
+                                            <td class="py-3 px-4 border-b">Calificada</td>
+                                            <td class="py-3 px-4 border-b">⭐⭐⭐⭐</td>
+                                            <td class="py-3 px-4 border-b">Armados RB</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consulta por RUT Cliente -->
+                <div class="bg-white rounded-xl shadow-2xl p-8 border border-gray-200">
+                    <h3 class="text-2xl font-bold text-center text-[#0A9396] mb-6">Consulta por RUT de Cliente</h3>
+                    <p class="text-base text-center text-gray-600 mb-6">Busque rápidamente todas las órdenes de trabajo asociadas a un cliente específico, obteniendo su historial completo de servicios.</p>
+                    <div class="mockup-browser">
+                        <div class="mockup-browser-header">
+                            <div class="mockup-browser-dots">
+                                <div class="mockup-browser-dot bg-red-500"></div>
+                                <div class="mockup-browser-dot bg-yellow-500"></div>
+                                <div class="mockup-browser-dot bg-green-500"></div>
+                            </div>
+                            <div class="mockup-browser-url-bar">install-track.cl/portal/consultas/rut</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex flex-wrap items-center gap-4 mb-6">
+                                <div class="flex flex-col">
+                                    <label for="rut-estado" class="text-sm font-medium text-gray-700 mb-1">Estado OT</label>
+                                    <select id="rut-estado" class="p-2 border border-gray-300 rounded-md">
+                                        <option>Todos</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="cedula-cliente" class="text-sm font-medium text-gray-700 mb-1">Cédula Cliente</label>
+                                    <input type="text" id="cedula-cliente" placeholder="Ej: 12202304-1" class="p-2 border border-gray-300 rounded-md">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="rut-fecha" class="text-sm font-medium text-gray-700 mb-1">Fecha desde-hasta</label>
+                                    <input type="text" id="rut-fecha" value="01/03/2020 - 30/07/2024" class="p-2 border border-gray-300 rounded-md">
+                                </div>
+                                <button class="bg-[#EE9B00] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#BB3E03] transition duration-300">Buscar</button>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                                    <thead>
+                                        <tr class="bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            <th class="py-3 px-4 border-b">N° OT</th>
+                                            <th class="py-3 px-4 border-b">Fecha Creación</th>
+                                            <th class="py-3 px-4 border-b">Rut Cliente</th>
+                                            <th class="py-3 px-4 border-b">Nombre Cliente</th>
+                                            <th class="py-3 px-4 border-b">Producto</th>
+                                            <th class="py-3 px-4 border-b">Estado</th>
+                                            <th class="py-3 px-4 border-b">Detalle</th>
+                                            <th class="py-3 px-4 border-b">Empresa Servicio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 border-b text-[#005F73] font-medium">100606</td>
+                                            <td class="py-3 px-4 border-b">1/7/2022</td>
+                                            <td class="py-3 px-4 border-b">12202304-1</td>
+                                            <td class="py-3 px-4 border-b">Juan Perez Perez</td>
+                                            <td class="py-3 px-4 border-b">Mesa Comedor 6 sillas</td>
+                                            <td class="py-3 px-4 border-b">Terminada</td>
+                                            <td class="py-3 px-4 border-b"></td>
+                                            <td class="py-3 px-4 border-b">Armados JP</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 border-b text-[#005F73] font-medium">100903</td>
+                                            <td class="py-3 px-4 border-b">17/7/2023</td>
+                                            <td class="py-3 px-4 border-b">12202304-1</td>
+                                            <td class="py-3 px-4 border-b">Juan Perez Perez</td>
+                                            <td class="py-3 px-4 border-b">Escritorio roble</td>
+                                            <td class="py-3 px-4 border-b">Calificada</td>
+                                            <td class="py-3 px-4 border-b">⭐⭐⭐⭐</td>
+                                            <td class="py-3 px-4 border-b">Armados JP</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 border-b text-[#005F73] font-medium">300203</td>
+                                            <td class="py-3 px-4 border-b">21/7/2024</td>
+                                            <td class="py-3 px-4 border-b">12202304-1</td>
+                                            <td class="py-3 px-4 border-b">Juan Perez Perez</td>
+                                            <td class="py-3 px-4 border-b">Calefont 12 litros</td>
+                                            <td class="py-3 px-4 border-b">Iniciada</td>
+                                            <td class="py-3 px-4 border-b"></td>
+                                            <td class="py-3 px-4 border-b">Instalaciones YZ</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 border-b text-[#005F73] font-medium">500204</td>
+                                            <td class="py-3 px-4 border-b">24/7/2024</td>
+                                            <td class="py-3 px-4 border-b">12202304-1</td>
+                                            <td class="py-3 px-4 border-b">Juan Perez Perez</td>
+                                            <td class="py-3 px-4 border-b">Bicicleta Aro 29</td>
+                                            <td class="py-3 px-4 border-b">Agendada</td>
+                                            <td class="py-3 px-4 border-b">Roberto Meza</td>
+                                            <td class="py-3 px-4 border-b">Armados RB</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detalle Orden de Trabajo -->
+                <div class="bg-white rounded-xl shadow-2xl p-8 border border-gray-200">
+                    <h3 class="text-2xl font-bold text-center text-[#0A9396] mb-6">Detalle de Orden de Trabajo</h3>
+                    <p class="text-base text-center text-gray-600 mb-6">Acceda a la información completa de una orden de trabajo específica, incluyendo datos del cliente, producto, servicio y estado actual.</p>
+                    <div class="mockup-browser">
+                        <div class="mockup-browser-header">
+                            <div class="mockup-browser-dots">
+                                <div class="mockup-browser-dot bg-red-500"></div>
+                                <div class="mockup-browser-dot bg-yellow-500"></div>
+                                <div class="mockup-browser-dot bg-green-500"></div>
+                            </div>
+                            <div class="mockup-browser-url-bar">install-track.cl/portal/consultas/ot/100201</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                <div class="flex flex-col">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">N° OT</label>
+                                    <input type="text" value="100201" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">Cliente</label>
+                                    <input type="text" value="Juan Perez Perez" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">Rut</label>
+                                    <input type="text" value="22.022.022-2" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">Fono</label>
+                                    <input type="text" value="994494949" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                                <div class="flex flex-col md:col-span-2">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">Dirección</label>
+                                    <input type="text" value="Calle 2 - Ñuñoa" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">Fecha Creación OT</label>
+                                    <input type="text" value="1/7/2024" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">Primera Agenda Disponible</label>
+                                    <input type="text" value="4/7/2024 (PM)" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">Fecha Ingreso Link Agenda</label>
+                                    <input type="text" value="3/7/2024" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">Fecha Agendada Cliente</label>
+                                    <input type="text" value="11/7/2024 (AM)" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                            </div>
+                            <hr class="my-6 border-gray-200">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                <div class="flex flex-col md:col-span-2">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">Producto</label>
+                                    <input type="text" value="2001010010001 - Mesa Comedor con 6 sillas" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">Empresa Servicio</label>
+                                    <input type="text" value="Armados JP" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">Técnico Asignado</label>
+                                    <input type="text" value="Armando Meza" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">Tipo servicio</label>
+                                    <input type="text" value="Armado" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">Estado</label>
+                                    <input type="text" value="Agendada" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-sm font-medium text-gray-700 mb-1">Detalle</label>
+                                    <input type="text" value="" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                </div>
+                            </div>
+                            <div class="flex justify-end gap-4 mt-6">
+                                <button class="bg-[#EE9B00] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#BB3E03] transition duration-300">CONSULTAR HISTORIAL</button>
+                                <button class="bg-[#EE9B00] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#BB3E03] transition duration-300">CONSULTAR BITÁCORA</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historial Orden de Trabajo -->
+                <div class="bg-white rounded-xl shadow-2xl p-8 border border-gray-200">
+                    <h3 class="text-2xl font-bold text-center text-[#0A9396] mb-6">Historial de Orden de Trabajo</h3>
+                    <p class="text-base text-center text-gray-600 mb-6">Visualice un timeline completo de los eventos y estados de cada orden de trabajo, desde su creación hasta su finalización.</p>
+                    <div class="mockup-browser">
+                        <div class="mockup-browser-header">
+                            <div class="mockup-browser-dots">
+                                <div class="mockup-browser-dot bg-red-500"></div>
+                                <div class="mockup-browser-dot bg-yellow-500"></div>
+                                <div class="mockup-browser-dot bg-green-500"></div>
+                            </div>
+                            <div class="mockup-browser-url-bar">install-track.cl/portal/consultas/historial/100201</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-4 mb-6">
+                                <label for="historial-ot" class="text-sm font-medium text-gray-700">N° OT</label>
+                                <input type="text" id="historial-ot" value="100201" readonly class="p-2 border border-gray-200 rounded-md bg-gray-50">
+                                <button class="bg-[#EE9B00] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#BB3E03] transition duration-300">Buscar</button>
+                            </div>
+                            <div class="flex justify-between items-start my-8">
+                                <div class="flex flex-col items-center">
+                                    <div class="text-4xl text-[#94D2BD]">📋</div>
+                                    <p class="text-sm text-gray-600 mt-2">Creado</p>
+                                </div>
+                                <div class="text-4xl text-[#94D2BD] self-center">→</div>
+                                <div class="flex flex-col items-center">
+                                    <div class="text-4xl text-[#94D2BD]">📅</div>
+                                    <p class="text-sm text-gray-600 mt-2">Agendado</p>
+                                </div>
+                                <div class="text-4xl text-[#94D2BD] self-center">→</div>
+                                <div class="flex flex-col items-center">
+                                    <div class="text-4xl text-[#94D2BD]">👤</div>
+                                    <p class="text-sm text-gray-600 mt-2">Asignado</p>
+                                </div>
+                                <div class="text-4xl text-gray-400 self-center">→</div>
+                                <div class="flex flex-col items-center">
+                                    <div class="text-4xl text-gray-400">⚙️</div>
+                                    <p class="text-sm text-gray-400 mt-2">Iniciado</p>
+                                </div>
+                                <div class="text-4xl text-gray-400 self-center">→</div>
+                                <div class="flex flex-col items-center">
+                                    <div class="text-4xl text-gray-400">✅</div>
+                                    <p class="text-sm text-gray-400 mt-2">Terminado</p>
+                                </div>
+                            </div>
+                            <h4 class="font-bold text-lg text-gray-800 mb-3">Historial de Eventos:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                <li><span class="font-semibold">01/07/2024 10:15:35:</span> OT creada</li>
+                                <li><span class="font-semibold">01/07/2024 12:23:00:</span> Agendado para el 15/07/2024 PM, técnico Armando Meza</li>
+                                <li><span class="font-semibold">14/07/2024 14:00:00:</span> Mail recordatorio, técnico informado a cliente</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reportes y Otros -->
+                <div class="bg-white rounded-xl shadow-2xl p-8 border border-gray-200">
+                    <h3 class="text-2xl font-bold text-center text-[#0A9396] mb-6">Reportes y Análisis Avanzado</h3>
+                    <p class="text-base text-center text-gray-600 mb-6">Acceda a reportes detallados de nivel de servicio por empresa, armador y producto, además de alertas de incumplimiento y reportes de gestión.</p>
+                    <div class="mockup-browser">
+                        <div class="mockup-browser-header">
+                            <div class="mockup-browser-dots">
+                                <div class="mockup-browser-dot bg-red-500"></div>
+                                <div class="mockup-browser-dot bg-yellow-500"></div>
+                                <div class="mockup-browser-dot bg-green-500"></div>
+                            </div>
+                            <div class="mockup-browser-url-bar">install-track.cl/portal/reportes/nivel-servicio</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex flex-wrap items-center gap-4 mb-6">
+                                <div class="flex flex-col">
+                                    <label for="reporte-empresa" class="text-sm font-medium text-gray-700 mb-1">Nombre Empresa</label>
+                                    <select id="reporte-empresa" class="p-2 border border-gray-300 rounded-md">
+                                        <option>Todos</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="reporte-mes" class="text-sm font-medium text-gray-700 mb-1">Mes</label>
+                                    <select id="reporte-mes" class="p-2 border border-gray-300 rounded-md">
+                                        <option>Últimos 30 días</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="reporte-fecha" class="text-sm font-medium text-gray-700 mb-1">Fecha desde-hasta</label>
+                                    <input type="text" id="reporte-fecha" value="01/03/2024 - 30/07/2024" class="p-2 border border-gray-300 rounded-md">
+                                </div>
+                                <button class="bg-[#EE9B00] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#BB3E03] transition duration-300">Buscar</button>
+                            </div>
+                            <div class="overflow-x-auto mb-8">
+                                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                                    <thead>
+                                        <tr class="bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            <th class="py-3 px-4 border-b">Nombre Empresa</th>
+                                            <th class="py-3 px-4 border-b">Fecha Inicio</th>
+                                            <th class="py-3 px-4 border-b">Fin</th>
+                                            <th class="py-3 px-4 border-b">Servicios Agendados</th>
+                                            <th class="py-3 px-4 border-b">Cant./Niv Serv.</th>
+                                            <th class="py-3 px-4 border-b">Servicios Realizados</th>
+                                            <th class="py-3 px-4 border-b">En Plazo/Niv Serv.</th>
+                                            <th class="py-3 px-4 border-b">Calificación Promedio</th>
+                                            <th class="py-3 px-4 border-b">Niv. Serv. Trimestre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 border-b text-[#005F73] font-medium">Servicios Spa</td>
+                                            <td class="py-3 px-4 border-b">1/7/2024</td>
+                                            <td class="py-3 px-4 border-b">31/7/2024</td>
+                                            <td class="py-3 px-4 border-b">73</td>
+                                            <td class="py-3 px-4 border-b">73</td>
+                                            <td class="py-3 px-4 border-b">100%</td>
+                                            <td class="py-3 px-4 border-b">45</td>
+                                            <td class="py-3 px-4 border-b">62%</td>
+                                            <td class="py-3 px-4 border-b">⭐⭐⭐ (21)</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 border-b text-[#005F73] font-medium">Instal Plus</td>
+                                            <td class="py-3 px-4 border-b">1/7/2024</td>
+                                            <td class="py-3 px-4 border-b">31/7/2024</td>
+                                            <td class="py-3 px-4 border-b">38</td>
+                                            <td class="py-3 px-4 border-b">54</td>
+                                            <td class="py-3 px-4 border-b">70%</td>
+                                            <td class="py-3 px-4 border-b">31</td>
+                                            <td class="py-3 px-4 border-b">57%</td>
+                                            <td class="py-3 px-4 border-b">⭐⭐⭐⭐ (16)</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 border-b text-[#005F73] font-medium">Armados Ya</td>
+                                            <td class="py-3 px-4 border-b">1/7/2024</td>
+                                            <td class="py-3 px-4 border-b">31/7/2024</td>
+                                            <td class="py-3 px-4 border-b">50</td>
+                                            <td class="py-3 px-4 border-b">50</td>
+                                            <td class="py-3 px-4 border-b">100%</td>
+                                            <td class="py-3 px-4 border-b">50</td>
+                                            <td class="py-3 px-4 border-b">100%</td>
+                                            <td class="py-3 px-4 border-b">⭐⭐⭐⭐⭐ (20)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button class="bg-[#EE9B00] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#BB3E03] transition duration-300">Graficar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ai-analysis" class="mb-20">
+            <div class="bg-white rounded-xl shadow-2xl p-8 md:p-12 border border-gray-200">
+                <h2 class="text-4xl font-bold text-center text-[#005F73] mb-10">Análisis Inteligente de Reclamos con IA ✨</h2>
+                <p class="text-center text-gray-700 mb-10 max-w-4xl mx-auto text-lg">Aproveche el poder de la inteligencia artificial para transformar los reclamos de clientes en insights accionables. Identifique rápidamente los problemas subyacentes y mejore la satisfacción.</p>
+                <div class="max-w-3xl mx-auto">
+                    <textarea id="complaintInput" class="w-full p-5 border border-gray-300 rounded-xl mb-6 text-lg focus:outline-none focus:ring-4 focus:ring-[#0A9396] focus:border-transparent transition duration-200 ease-in-out shadow-sm" rows="8" placeholder="Pegue aquí el texto de un reclamo de cliente para que la IA lo analice y resuma..."></textarea>
+                    <button id="analyzeButton" class="w-full bg-[#0A9396] text-white font-bold py-4 px-8 rounded-xl hover:bg-[#005F73] transition duration-300 ease-in-out flex items-center justify-center text-xl shadow-lg">
+                        <span id="buttonText">Analizar Reclamo con IA ✨</span>
+                        <svg id="loadingSpinner" class="animate-spin -ml-1 mr-3 h-7 w-7 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </button>
+                    <div id="analysisOutput" class="mt-8 p-6 bg-blue-50 border border-blue-200 rounded-xl hidden shadow-inner">
+                        <h3 class="font-extrabold text-[#005F73] text-2xl mb-3">Resumen del Reclamo:</h3>
+                        <p id="summaryText" class="text-gray-800 text-lg leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-16 py-8 border-t-2 border-gray-300">
+            <h2 class="text-3xl font-bold text-[#005F73] mb-3">¡Transforma tu servicio post-venta hoy!</h2>
+            <p class="text-xl text-[#0A9396] max-w-2xl mx-auto">Con INSTALL-TRACK, convierte cada interacción en una oportunidad para construir lealtad y eficiencia.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const wrapLabel = (label) => {
+            const max_width = 16;
+            if (label.length <= max_width) {
+                return label;
+            }
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).trim().length > max_width) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            }
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const commonChartOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    bodyFont: {
+                        size: 14
+                    },
+                    titleFont: {
+                        size: 16,
+                        weight: 'bold'
+                    },
+                    padding: 12,
+                    boxPadding: 8,
+                    cornerRadius: 6
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                y: {
+                    ticks: {
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            }
+        };
+
+        const onTimeData = {
+            labels: ['Servicios Spa', 'Instal Plus', 'Check Armados', 'Armados Ya', 'OK Instaladores', 'Retail Service'].map(wrapLabel),
+            datasets: [{
+                label: '% en Plazo',
+                data: [62, 57, 54, 100, 24, 90],
+                backgroundColor: '#94D2BD',
+                borderColor: '#0A9396',
+                borderWidth: 1,
+                borderRadius: 5
+            }]
+        };
+
+        new Chart(document.getElementById('onTimeChart'), {
+            type: 'bar',
+            data: onTimeData,
+            options: {
+                ...commonChartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const ratingData = {
+            labels: ['Servicios Spa', 'Instal Plus', 'Check Armados', 'Armados Ya', 'OK Instaladores', 'Retail Service'].map(wrapLabel),
+            datasets: [{
+                label: 'Calificación Promedio (de 5)',
+                data: [3.5, 4.0, 1.0, 5.0, 2.5, 5.0],
+                backgroundColor: '#E9D8A6',
+                borderColor: '#EE9B00',
+                borderWidth: 1,
+                borderRadius: 5
+            }]
+        };
+
+        new Chart(document.getElementById('ratingChart'), {
+            type: 'bar',
+            data: ratingData,
+            options: {
+                ...commonChartOptions,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 5
+                    }
+                }
+            }
+        });
+
+        const trendData = {
+            labels: ['Mayo', 'Junio', 'Julio'],
+            datasets: [{
+                label: 'Retail Service',
+                data: [85, 85, 90],
+                borderColor: '#005F73',
+                backgroundColor: 'rgba(0, 95, 115, 0.2)',
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#005F73',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 5
+            }, {
+                label: 'Armados Ya',
+                data: [91, 96, 100],
+                borderColor: '#0A9396',
+                backgroundColor: 'rgba(10, 147, 150, 0.2)',
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#0A9396',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 5
+            }, {
+                label: 'Instal Plus',
+                data: [45, 51, 57],
+                borderColor: '#EE9B00',
+                backgroundColor: 'rgba(238, 155, 0, 0.2)',
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#EE9B00',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 5
+            }]
+        };
+
+        new Chart(document.getElementById('trendChart'), {
+            type: 'line',
+            data: trendData,
+            options: {
+                ...commonChartOptions,
+                scales: {
+                     y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        document.getElementById('analyzeButton').addEventListener('click', async () => {
+            const complaintInput = document.getElementById('complaintInput').value;
+            const analysisOutput = document.getElementById('analysisOutput');
+            const summaryText = document.getElementById('summaryText');
+            const buttonText = document.getElementById('buttonText');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+
+            if (!complaintInput.trim()) {
+                summaryText.textContent = 'Por favor, ingrese un reclamo para analizar.';
+                analysisOutput.classList.remove('hidden');
+                return;
+            }
+
+            buttonText.classList.add('hidden');
+            loadingSpinner.classList.remove('hidden');
+            analysisOutput.classList.add('hidden');
+            summaryText.textContent = '';
+
+            let chatHistory = [];
+            const prompt = `Analiza el siguiente reclamo de cliente y proporciona un resumen conciso de los problemas principales y el sentimiento general del cliente. El reclamo es: "${complaintInput}"`;
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            const payload = { contents: chatHistory };
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            let retries = 0;
+            const maxRetries = 5;
+            let delay = 1000;
+
+            while (retries < maxRetries) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.status === 429) {
+                        retries++;
+                        await new Promise(res => setTimeout(res, delay));
+                        delay *= 2;
+                        continue;
+                    }
+
+                    const result = await response.json();
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        summaryText.textContent = text;
+                    } else {
+                        summaryText.textContent = 'No se pudo obtener un resumen. Intente nuevamente.';
+                    }
+                    analysisOutput.classList.remove('hidden');
+                    break;
+
+                } catch (error) {
+                    retries++;
+                    await new Promise(res => setTimeout(res, delay));
+                    delay *= 2;
+                    if (retries === maxRetries) {
+                        summaryText.textContent = 'Error al conectar con la IA. Por favor, intente más tarde.';
+                        analysisOutput.classList.remove('hidden');
+                    }
+                }
+            }
+
+            buttonText.classList.remove('hidden');
+            loadingSpinner.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
